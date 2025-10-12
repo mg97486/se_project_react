@@ -1,4 +1,4 @@
-import "./Itemcard.css";
+import "./itemcard.css";
 
 function ItemCard({ item, onCardClick }) {
   const handleCardClick = () => {
