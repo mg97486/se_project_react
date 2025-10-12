@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { defaultClothingItems } from "../../utils/constants";
 
 import "./App.css";
 import { coordinates, APIkey } from "../../utils/constants";
@@ -7,7 +8,7 @@ import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
-import { getWeather, filterweatherData } from "../../utils/weatherApi";
+import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -15,6 +16,8 @@ function App() {
     temp: { F: 999 },
     city: "",
   });
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
@@ -34,7 +37,7 @@ function App() {
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
-        const filteredData = filterweatherData(data);
+        const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
       })
 
@@ -45,15 +48,20 @@ function App() {
     <div className="page">
       <div className="page__content">
         <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-        <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+        <Main
+          clothingItems={clothingItems}
+          weatherData={weatherData}
+          handleCardClick={handleCardClick}
+        />
       </div>
       <ModalWithForm
+        name="add-garment"
         title="New Garment"
         buttonText="Add garment"
         activeModal={activeModal}
         onClose={closeActiveModal}
       >
-        <label htmlFor="" className="modal__label">
+        <label htmlFor="name" className="modal__label">
           Name{" "}
           <input
             type="text"
@@ -74,19 +82,40 @@ function App() {
         <fieldset className="modal__radio-buttons">
           <legend className="modal__legend">Select weather type</legend>
           <label htmlFor="hot" className="modal__label modal__label_type_radio">
-            <input id="hot" type="radio" className="modal__radio_input" /> Hot
+            <input
+              id="hot"
+              type="radio"
+              className="modal__radio_input"
+              name="weather"
+              value="hot"
+            />{" "}
+            Hot
           </label>
           <label
             htmlFor="warm"
             className="modal__label modal__label_type_radio"
           >
-            <input id="warm" type="radio" className="modal__radio_input" /> Warm
+            <input
+              id="warm"
+              type="radio"
+              className="modal__radio_input"
+              name="weather"
+              value="warm"
+            />{" "}
+            Warm
           </label>
           <label
             htmlFor="cold"
             className="modal__label modal__label_type_radio"
           >
-            <input id="cold" type="radio" className="modal__radio_input" /> Cold
+            <input
+              id="cold"
+              type="radio"
+              className="modal__radio_input"
+              name="weather"
+              value="cold"
+            />{" "}
+            Cold
           </label>
         </fieldset>
       </ModalWithForm>
