@@ -2,7 +2,7 @@ import react from "react";
 import "./Footer.css";
 
 const Footer = () => {
-  const year = new Date().getFullYear(); // automatically gets current year
+  const year = new Date().getFullYear();
   return (
     <footer className="footer">
       <span className="footer-left">Matt Geary</span>
