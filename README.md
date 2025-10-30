@@ -30,3 +30,7 @@ npm install
 # 4. Start the development server
 npm run dev
 ```
+
+## Project Pitch Video
+
+https://drive.google.com/file/d/1UjZoZ4AK8j3EL8QdWKTpU1HxQdGopYkc/view?usp=sharing

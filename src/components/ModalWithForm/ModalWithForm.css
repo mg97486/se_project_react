@@ -105,10 +105,14 @@
   width: 124px;
   height: 36px;
   background-color: #f3f3f3;
-  color: #8b8b8b;
+  color: #000000;
   border: none;
   border-radius: 6px;
   cursor: not-allowed;
   font-size: 14px;
   font-weight: 500;
+}
+
+.modal__submit:hover {
+  color: #00000099;
 }
