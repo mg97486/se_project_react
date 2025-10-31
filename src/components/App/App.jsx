@@ -5,7 +5,7 @@ import { addItem } from "../../utils/api";
 import { removeItem } from "../../utils/api";
 
 import "./App.css";
-import { coordinates, APIkey } from "../../utils/constants";
+import { coordinates, apiKey } from "../../utils/constants";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Profile from "../Profile/Profile";
@@ -13,7 +13,7 @@ import Main from "../Main/Main";
 
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit.js";
 import AddItemModal from "../AddItemModal/AddItemModal";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
     isDay: false,
   });
 
-  const [activeModal, setActiveModal] = useState([]);
+  const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
@@ -74,7 +74,7 @@ function App() {
   }
 
   useEffect(() => {
-    getWeather(coordinates, APIkey)
+    getWeather(coordinates, apiKey)
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
@@ -114,6 +114,7 @@ function App() {
                 <Profile
                   clothingItems={clothingItems}
                   handleCardClick={handleCardClick}
+                  onAddClick={handleAddClick}
                 />
               }
             />

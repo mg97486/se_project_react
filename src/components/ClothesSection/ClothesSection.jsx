@@ -3,17 +3,14 @@ import ItemCard from "../ItemCard/itemCard";
 
 export default function ClothesSection({
   clothingItems,
-
+  onAddClick,
   handleCardClick,
 }) {
   return (
     <div className="clothes-section">
       <div className="clothes-section__row">
         <p>Your items </p>
-        <button
-          className="clothes-section__add-button"
-          onClick={handleCardClick}
-        >
+        <button className="clothes-section__add-button" onClick={onAddClick}>
           + Add new
         </button>
       </div>
