@@ -2,7 +2,7 @@ import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./RegisterModal.css";
 
-const registerModal = ({ isOpen, onClose }) => {
+const RegisterModal = ({ isOpen, onClose }) => {
   const defaultValues = { email: "", password: "", name: "", avatarUrl: "" };
 
   const { values, handleChange } = useForm(defaultValues);
@@ -73,4 +73,4 @@ const registerModal = ({ isOpen, onClose }) => {
   );
 };
 
-export default registerModal;
+export default RegisterModal;
