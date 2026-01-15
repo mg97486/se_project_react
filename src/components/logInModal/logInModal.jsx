@@ -1,7 +1,7 @@
 import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { NavLink } from "react-router-dom";
-import "./loginModal.css";
+import "./logInModal.css";
 
 const LogInModal = ({ isOpen, onClose }) => {
   const defaultValues = { email: "", password: "" };
