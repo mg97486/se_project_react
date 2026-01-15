@@ -1,8 +1,11 @@
 import "./itemCard.css";
 
-function ItemCard({ item, onCardClick }) {
+function ItemCard({ item, onCardClick, onCardLike }) {
   const handleCardClick = () => {
     onCardClick(item);
+  };
+  const handleCardLike = () => {
+    onCardLike(item);
   };
 
   return (

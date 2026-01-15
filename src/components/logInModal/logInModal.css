@@ -1,0 +1,12 @@
+.sign-up-link {
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0 5px;
+  padding: 0;
+}
+
+.sign-up-text {
+  display: flex;
+  justify-content: center;
+}
