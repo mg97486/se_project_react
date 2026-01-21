@@ -17,7 +17,7 @@ import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 import AddItemModal from "../AddItemModal/AddItemModal";
 
-import LogInModal from "../logInModal/logInModal.jsx";
+import LogInModal from "../LoginModal/logInModal.jsx";
 import RegisterModal from "../RegisterModal/RegisterModal.jsx";
 import { use } from "react";
 import ProtectedRoute from "../ProtectedRoute.jsx";
@@ -95,7 +95,7 @@ function App() {
         (error) => {
           reject(error);
         },
-        { timeout: 10000 }
+        { timeout: 10000 },
       );
     });
   };
@@ -104,7 +104,7 @@ function App() {
     removeItem(itemId)
       .then(() => {
         setClothingItems((prevItems) =>
-          prevItems.filter((item) => item._id !== itemId)
+          prevItems.filter((item) => item._id !== itemId),
         );
         closeActiveModal();
       })
@@ -118,7 +118,7 @@ function App() {
           .addCardLike(id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
+              cards.map((item) => (item._id === id ? updatedCard : item)),
             );
           })
           .catch((err) => console.error(err))
@@ -126,7 +126,7 @@ function App() {
           .removeCardLike(id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
+              cards.map((item) => (item._id === id ? updatedCard : item)),
             );
           })
           .catch((err) => console.error(err));
@@ -157,7 +157,7 @@ function App() {
         // If we fail to get the user's coords, log and use the default coordinates
         console.warn(
           "Could not get user location, using default coordinates.",
-          err
+          err,
         );
         return getWeather(coordinates, apiKey);
       })
