@@ -13,15 +13,15 @@ import Main from "../Main/Main";
 
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit.js";
-import CurrentUserContext from "../../contexts/CurrentUserContext.js";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
 
-import LogInModal from "../LoginModal/logInModal.jsx";
-import RegisterModal from "../RegisterModal/RegisterModal.jsx";
+import LogInModal from "../LoginModal/logInModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
 import { use } from "react";
-import ProtectedRoute from "../ProtectedRoute.jsx";
-import ClothesSection from "../ClothesSection/ClothesSection.jsx";
+import ProtectedRoute from "../ProtectedRoute";
+import ClothesSection from "../ClothesSection/ClothesSection";
 function App() {
   const [weatherData, setWeatherData] = useState({
     type: "",

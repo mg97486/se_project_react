@@ -5,7 +5,7 @@ import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext.js";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function Header({
   handleAddClick,
