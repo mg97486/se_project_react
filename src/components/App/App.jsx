@@ -17,7 +17,7 @@ import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
 
-import LogInModal from "../LoginModal/logInModal";
+import LogInModal from "../LoginModal/LogInModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import { use } from "react";
 import ProtectedRoute from "../ProtectedRoute";
