@@ -1,9 +1,8 @@
 import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { NavLink } from "react-router-dom";
 import "./logInModal.css";
 
-const LogInModal = ({ isOpen, onClose }) => {
+const LogInModal = ({ isOpen, onClose, onSignUpClick }) => {
   const defaultValues = { email: "", password: "" };
 
   const { values, handleChange } = useForm(defaultValues);
@@ -46,9 +45,15 @@ const LogInModal = ({ isOpen, onClose }) => {
           onChange={handleChange}
         />
       </label>
-      <NavLink to="/sign-up" className="sign-up-link">
-        <p className="sign-up-text"> or Sign Up</p>
-      </NavLink>
+      <div className="login__button-group">
+        <button
+          type="button"
+          onClick={onSignUpClick}
+          className="login__modal-link"
+        >
+          <p className="login__modal-text">or Sign up</p>
+        </button>
+      </div>
     </ModalWithForm>
   );
 };

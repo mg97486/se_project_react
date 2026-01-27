@@ -22,10 +22,34 @@ function ModalWithForm({
           aria-label="Close"
         ></button>
         <form onSubmit={onSubmit} className="modal__form">
-          {children}
-          <button type="submit" className="modal__submit">
-            {buttonText}
-          </button>
+          {Array.isArray(children) ? (
+            <>
+              {children.filter(
+                (child) =>
+                  child?.props?.className !== "login__button-group" &&
+                  child?.props?.className !== "register__button-group",
+              )}
+              <div className="modal__submit-box">
+                <button type="submit" className="modal__submit">
+                  {buttonText}
+                </button>
+                {children.find(
+                  (child) =>
+                    child?.props?.className === "login__button-group" ||
+                    child?.props?.className === "register__button-group",
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              {children}
+              <div className="modal__submit-box">
+                <button type="submit" className="modal__submit">
+                  {buttonText}
+                </button>
+              </div>
+            </>
+          )}
         </form>
       </div>
     </div>

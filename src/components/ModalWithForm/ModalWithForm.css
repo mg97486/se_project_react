@@ -11,7 +11,9 @@
   font-family: "Cabinet Grotesk", sans-serif;
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s;
+  transition:
+    opacity 0.3s ease-in-out,
+    visibility 0.3s;
   z-index: 1000;
 }
 
@@ -24,13 +26,17 @@
   background-color: #fff;
   padding: 28px 32px 36px;
   width: 496px;
-  min-height: 436px;
+  height: 304px;
   box-sizing: border-box;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   position: relative;
   display: flex;
   flex-direction: column;
+}
+
+.modal_type_sign-up .modal__content {
+  height: 500px;
 }
 
 .modal__title {
@@ -102,12 +108,12 @@
 }
 
 .modal__submit {
-  width: 124px;
+  width: 73px;
   height: 36px;
-  background-color: #f3f3f3;
-  color: #000000;
+  background-color: #0000004d;
+  color: #ffffff;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
   cursor: not-allowed;
   font-size: 14px;
   font-weight: 500;
@@ -115,4 +121,10 @@
 
 .modal__submit:hover {
   color: #00000099;
+}
+
+.modal__submit-box {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }

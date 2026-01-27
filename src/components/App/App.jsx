@@ -235,11 +235,7 @@ function App() {
             isOpen={activeModal === "preview"}
             onDelete={handleDeleteItem}
           />
-          <RegisterModal
-            isOpen={activeModal === "sign-up"}
-            onClose={closeActiveModal}
-            onSubmit={registerUser}
-          />
+
           <ClothesSection
             isLoggedIn={isLoggedIn}
             clothingItems={clothingItems}
@@ -251,6 +247,13 @@ function App() {
             isOpen={activeModal === "log-in"}
             onClose={closeActiveModal}
             onSubmit={loginUser}
+            onSignUpClick={handleSignUpClick}
+          />
+          <RegisterModal
+            isOpen={activeModal === "sign-up"}
+            onClose={closeActiveModal}
+            onSubmit={registerUser}
+            onLogInClick={handleLogInClick}
           />
         </div>
       </CurrentUserContext.Provider>
