@@ -139,6 +139,18 @@ function App() {
       email: userData.email,
       password: userData.password,
     };
+
+    api
+      .register(newUser)
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
+        setCurrentUser(res.user);
+        setIsLoggedIn(true);
+        closeActiveModal();
+      })
+      .catch((err) => {
+        console.error("Registration failed:", err);
+      });
   };
 
   const loginUser = (userData) => {
@@ -146,6 +158,13 @@ function App() {
       email: userData.email,
       password: userData.password,
     };
+
+    api.signIn(existingUser).then((res) => {
+      localStorage.setItem("jwt", res.token);
+      setCurrentUser(res.user);
+      setIsLoggedIn(true);
+      closeActiveModal();
+    });
   };
 
   useEffect(() => {
@@ -234,13 +253,6 @@ function App() {
             onClose={closeActiveModal}
             isOpen={activeModal === "preview"}
             onDelete={handleDeleteItem}
-          />
-
-          <ClothesSection
-            isLoggedIn={isLoggedIn}
-            clothingItems={clothingItems}
-            onAddClick={handleAddClick}
-            handleCardClick={handleCardClick}
           />
 
           <LogInModal

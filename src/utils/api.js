@@ -49,7 +49,7 @@ export const removeItem = (itemId) => {
   }).then(handleServerResponse);
 };
 
-export const signUp = ({ email, password, name, avatar }) => {
+export const register = ({ email, password, name, avatar }) => {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {

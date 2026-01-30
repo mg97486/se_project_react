@@ -1,4 +1,5 @@
 import { useForm } from "../../hooks/useForm";
+import { signIn } from "../../utils/api";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./logInModal.css";
 
@@ -9,7 +10,16 @@ const LogInModal = ({ isOpen, onClose, onSignUpClick }) => {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    onAddItem(values);
+    signIn({
+      email: values.email,
+      password: values.password,
+    })
+      .then((res) => {
+        console.log("Login successful:", res);
+      })
+      .catch((err) => {
+        console.error("Login failed:", err);
+      });
   }
 
   return (
@@ -25,7 +35,7 @@ const LogInModal = ({ isOpen, onClose, onSignUpClick }) => {
         Email{" "}
         <input
           type="email"
-          name="Email"
+          name="email"
           className="modal__input"
           id="Email"
           placeholder="Email"
@@ -36,7 +46,7 @@ const LogInModal = ({ isOpen, onClose, onSignUpClick }) => {
       <label htmlFor="password" className="modal__label">
         Password{" "}
         <input
-          type="text"
+          type="password"
           name="password"
           className="modal__input"
           id="password"
