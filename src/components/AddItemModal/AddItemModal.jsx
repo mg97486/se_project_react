@@ -1,15 +1,24 @@
 import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./AddItemModal.css";
+import { useState } from "react";
 
-const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
-  const defaultValues = { name: "", imageUrl: "", weatherType: "" };
-
-  const { values, handleChange } = useForm(defaultValues);
+const AddItemModal = ({ isOpen, onClose, onAddItem }) => {
+  const { values, handleChange, resetForm } = useForm({
+    name: "",
+    imageUrl: "",
+    weatherType: "",
+  });
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    onAddItem(values);
+    onAddItem(values)
+      .then(() => {
+        resetForm();
+      })
+      .catch((err) => {
+        console.error("Error adding item:", err);
+      });
   }
 
   return (

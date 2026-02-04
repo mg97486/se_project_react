@@ -4,26 +4,18 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 import "./RegisterModal.css";
 
-const RegisterModal = ({ isOpen, onClose, onLogInClick }) => {
+const RegisterModal = ({ isOpen, onClose, onLogInClick, onSubmit }) => {
   const defaultValues = { email: "", password: "", name: "", avatarUrl: "" };
 
-  const { values, handleChange } = useForm(defaultValues);
+  const { values, handleChange, resetForm } = useForm(defaultValues);
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    register({
-      email: values.email,
-      password: values.password,
-      name: values.name,
+    onSubmit({
+      ...values,
       avatar: values.avatarUrl,
-    })
-      .then((res) => {
-        console.log("Registration successful:", res);
-        onClose();
-      })
-      .catch((err) => {
-        console.error("Registration failed:", err);
-      });
+      resetForm,
+    });
   }
 
   return (

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import { getItems } from "../../utils/api";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { getItems, updateUserInfo } from "../../utils/api";
 import { addItem } from "../../utils/api";
+import * as api from "../../utils/api";
 import { removeItem } from "../../utils/api";
 
 import "./App.css";
@@ -19,6 +20,7 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 
 import LogInModal from "../logInModal/logInModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import { use } from "react";
 import ProtectedRoute from "../ProtectedRoute";
 import ClothesSection from "../ClothesSection/ClothesSection";
@@ -37,6 +39,8 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -76,6 +80,17 @@ function App() {
 
   const closeActiveModal = () => {
     setActiveModal("");
+  };
+
+  const handleOpenEditProfile = () => {
+    setActiveModal("edit-profile");
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    setCurrentUser(null);
+    navigate("/");
   };
 
   // Helper to get user's coordinates using the Geolocation API
@@ -143,8 +158,7 @@ function App() {
     api
       .register(newUser)
       .then((res) => {
-        localStorage.setItem("jwt", res.token);
-        setCurrentUser(res.user);
+        loginUser({ email: userData.email, password: userData.password });
         setIsLoggedIn(true);
         closeActiveModal();
       })
@@ -159,12 +173,20 @@ function App() {
       password: userData.password,
     };
 
-    api.signIn(existingUser).then((res) => {
-      localStorage.setItem("jwt", res.token);
-      setCurrentUser(res.user);
-      setIsLoggedIn(true);
-      closeActiveModal();
-    });
+    api
+      .signIn(existingUser)
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
+        return api.getUserInfo();
+      })
+      .then((userData) => {
+        setCurrentUser(userData);
+        setIsLoggedIn(true);
+        closeActiveModal();
+      })
+      .catch((err) => {
+        console.error("Login failed:", err);
+      });
   };
 
   useEffect(() => {
@@ -197,9 +219,18 @@ function App() {
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      // Verify token and fetch user data if needed
-      setIsLoggedIn(true);
-      // Fetch and set current user data here if your API supports it
+      api
+        .getUserInfo()
+        .then((userData) => {
+          setCurrentUser(userData);
+          setIsLoggedIn(true);
+        })
+        .catch((err) => {
+          console.error("Token validation failed:", err);
+          localStorage.removeItem("jwt");
+          setIsLoggedIn(false);
+          setCurrentUser(null);
+        });
     }
   }, []);
 
@@ -235,12 +266,15 @@ function App() {
                       clothingItems={clothingItems}
                       handleCardClick={handleCardClick}
                       onAddClick={handleAddClick}
+                      onEditProfile={handleOpenEditProfile}
+                      onSignOut={handleSignOut}
                     />
                   </ProtectedRoute>
                 }
               />
             </Routes>
           </div>
+          <Footer />
 
           <AddItemModal
             onClose={closeActiveModal}
@@ -253,6 +287,12 @@ function App() {
             onClose={closeActiveModal}
             isOpen={activeModal === "preview"}
             onDelete={handleDeleteItem}
+          />
+
+          <EditProfileModal
+            isOpen={activeModal === "edit-profile"}
+            onClose={closeActiveModal}
+            onSubmit={updateUserInfo}
           />
 
           <LogInModal

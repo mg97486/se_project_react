@@ -1,25 +1,16 @@
 import { useForm } from "../../hooks/useForm";
-import { signIn } from "../../utils/api";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./logInModal.css";
 
-const LogInModal = ({ isOpen, onClose, onSignUpClick }) => {
+const LogInModal = ({ isOpen, onClose, onSignUpClick, onSubmit }) => {
   const defaultValues = { email: "", password: "" };
 
-  const { values, handleChange } = useForm(defaultValues);
+  const { values, handleChange, resetForm } = useForm(defaultValues);
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    signIn({
-      email: values.email,
-      password: values.password,
-    })
-      .then((res) => {
-        console.log("Login successful:", res);
-      })
-      .catch((err) => {
-        console.error("Login failed:", err);
-      });
+    onSubmit(values);
+    resetForm;
   }
 
   return (

@@ -2,27 +2,24 @@ import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./Sidebar.css";
 
-export default function Sidebar(
-  editProfile,
-  onEditProfile,
-  signOut,
-  onSignOut
-) {
+export default function Sidebar({ onEditProfile, onSignOut }) {
   const currentUser = useContext(CurrentUserContext);
+
   const handleEditProfile = () => {
-    onEditProfile(editProfile);
+    if (typeof onEditProfile === "function") onEditProfile();
   };
 
   const handleSignOut = () => {
-    onSignOut(signOut);
+    if (typeof onSignOut === "function") onSignOut();
   };
+
   return (
     <aside className="sidebar">
       <div className="sidebar__profile">
-        <p className="sidebar__username">{currentUser.name}</p>
+        <p className="sidebar__username">{currentUser?.name}</p>
         <img
-          src={currentUser.avatar}
-          alt={currentUser.name}
+          src={currentUser?.avatar}
+          alt={currentUser?.name}
           className="sidebar__avatar"
         ></img>
       </div>
