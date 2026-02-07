@@ -1,5 +1,6 @@
 import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useEffect } from "react";
 import "./AddItemModal.css";
 import { useState } from "react";
 
@@ -12,14 +13,14 @@ const AddItemModal = ({ isOpen, onClose, onAddItem }) => {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    onAddItem(values)
-      .then(() => {
-        resetForm();
-      })
-      .catch((err) => {
-        console.error("Error adding item:", err);
-      });
+    onAddItem(values);
   }
+
+  useEffect(() => {
+    if (isOpen) {
+      resetForm();
+    }
+  }, [isOpen]);
 
   return (
     <ModalWithForm

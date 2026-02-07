@@ -2,7 +2,13 @@ import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./ItemModal.css";
 
-function ItemModal({ activeModal, onClose, card, onDelete, isLoggedIn }) {
+function ItemModal({
+  activeModal,
+  onClose,
+  card,
+  onRequestDelete,
+  isLoggedIn,
+}) {
   const currentUser = useContext(CurrentUserContext);
   return (
     <div
@@ -19,11 +25,11 @@ function ItemModal({ activeModal, onClose, card, onDelete, isLoggedIn }) {
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>
         </div>
-        {isLoggedIn && currentUser._id === card.owner._id && (
+        {isLoggedIn && currentUser._id === card.owner && (
           <button
             type="button"
             className="modal__delete-button"
-            onClick={() => onDelete(card._id)}
+            onClick={() => onRequestDelete(card)}
           >
             Delete item
           </button>

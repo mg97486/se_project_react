@@ -71,7 +71,7 @@ export const signIn = ({ email, password }) => {
 
 export const likeItem = (itemId) => {
   const token = localStorage.getItem("jwt");
-  return fetch(`${baseUrl}/items/likes/${itemId}`, {
+  return fetch(`${baseUrl}/items/${itemId}/likes`, {
     method: "PUT",
     headers: {
       ...headers,
@@ -82,7 +82,7 @@ export const likeItem = (itemId) => {
 
 export const unlikeItem = (itemId) => {
   const token = localStorage.getItem("jwt");
-  return fetch(`${baseUrl}/items/likes/${itemId}`, {
+  return fetch(`${baseUrl}/items/${itemId}/likes`, {
     method: "DELETE",
     headers: {
       ...headers,

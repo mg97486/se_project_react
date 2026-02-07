@@ -24,6 +24,7 @@ import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import { use } from "react";
 import ProtectedRoute from "../ProtectedRoute";
 import ClothesSection from "../ClothesSection/ClothesSection";
+import DeleteItemModal from "../DeleteItemModal";
 function App() {
   const [weatherData, setWeatherData] = useState({
     type: "",
@@ -126,11 +127,24 @@ function App() {
       .catch((err) => console.error("Error deleting item:", err));
   }
 
+  const handleUpdateUser = (userData) => {
+    api
+      .updateUserInfo(userData)
+      .then((updateUser) => {
+        setCurrentUser(updateUser);
+        closeActiveModal();
+      })
+
+      .catch((err) => {
+        console.error("Failed to update Profile:", err);
+      });
+  };
+
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
     !isLiked
       ? api
-          .addCardLike(id, token)
+          .likeItem(id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard : item)),
@@ -138,7 +152,7 @@ function App() {
           })
           .catch((err) => console.error(err))
       : api
-          .removeCardLike(id, token)
+          .unlikeItem(id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard : item)),
@@ -265,6 +279,7 @@ function App() {
                     <Profile
                       clothingItems={clothingItems}
                       handleCardClick={handleCardClick}
+                      handleCardLike={handleCardLike}
                       onAddClick={handleAddClick}
                       onEditProfile={handleOpenEditProfile}
                       onSignOut={handleSignOut}
@@ -286,13 +301,22 @@ function App() {
             card={selectedCard}
             onClose={closeActiveModal}
             isOpen={activeModal === "preview"}
+            onRequestDelete={() => setActiveModal("delete")}
+            isLoggedIn={isLoggedIn}
+          />
+
+          <DeleteItemModal
+            activeModal={activeModal}
+            onClose={closeActiveModal}
+            card={selectedCard}
             onDelete={handleDeleteItem}
+            isLoggedIn={isLoggedIn}
           />
 
           <EditProfileModal
             isOpen={activeModal === "edit-profile"}
             onClose={closeActiveModal}
-            onSubmit={updateUserInfo}
+            onSubmit={handleUpdateUser}
           />
 
           <LogInModal

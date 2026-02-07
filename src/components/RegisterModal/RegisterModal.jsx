@@ -1,4 +1,5 @@
 import { useForm } from "../../hooks/useForm";
+import { useEffect } from "react";
 import { register } from "../../utils/api";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
@@ -14,9 +15,14 @@ const RegisterModal = ({ isOpen, onClose, onLogInClick, onSubmit }) => {
     onSubmit({
       ...values,
       avatar: values.avatarUrl,
-      resetForm,
     });
   }
+
+  useEffect(() => {
+    if (isOpen) {
+      resetForm();
+    }
+  }, [isOpen]);
 
   return (
     <ModalWithForm

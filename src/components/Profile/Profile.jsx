@@ -5,6 +5,7 @@ import "./Profile.css";
 export default function Profile({
   clothingItems,
   handleCardClick,
+  handleCardLike,
   onAddClick,
   onEditProfile,
   onSignOut,
@@ -16,6 +17,7 @@ export default function Profile({
         clothingItems={clothingItems}
         onAddClick={onAddClick}
         handleCardClick={handleCardClick}
+        handleCardLike={handleCardLike}
       />
     </section>
   );

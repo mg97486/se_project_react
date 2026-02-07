@@ -27,3 +27,19 @@
   border: 1px solid;
   border-radius: 5%;
 }
+
+.card__like-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 18px;
+  height: 15px;
+  background-image: url("../../images/like-button.svg");
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+}
+
+.card__like-button_liked {
+  background-image: url("../../images/like-button-filled.svg");
+}

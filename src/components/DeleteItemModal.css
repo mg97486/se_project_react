@@ -1,0 +1,31 @@
+.modal__cancel-button {
+  background-color: transparent;
+  border: none;
+  color: #555;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 16px;
+  align-items: center;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal__caption {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  margin-bottom: 16px;
+}
+.delete__item_modal-delete-button {
+  background-color: transparent;
+  border: none;
+  color: #ff4d00;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 16px;
+  align-items: center;
+  padding: 0;
+  margin-bottom: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
