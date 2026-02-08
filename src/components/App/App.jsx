@@ -128,7 +128,7 @@ function App() {
   }
 
   const handleUpdateUser = (userData) => {
-    api
+    return api
       .updateUserInfo(userData)
       .then((updateUser) => {
         setCurrentUser(updateUser);
@@ -269,6 +269,7 @@ function App() {
                     clothingItems={clothingItems}
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
+                    handleCardLike={handleCardLike}
                   />
                 }
               />

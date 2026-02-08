@@ -36,6 +36,7 @@
   height: 15px;
   background-image: url("../../images/like-button.svg");
   background-size: cover;
+  background-color: transparent;
   border: none;
   cursor: pointer;
 }
