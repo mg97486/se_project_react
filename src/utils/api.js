@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3001";
+import { BASE_URL } from "../utils/constants";
 
 const headers = {
   "Content-Type": "application/json",
@@ -20,11 +20,11 @@ const handleServerResponse = (res) => {
 };
 
 export const getItems = () =>
-  fetch(`${baseUrl}/items`, { headers }).then(handleServerResponse);
+  fetch(`${BASE_URL}/items`, { headers }).then(handleServerResponse);
 
 export const addItem = ({ name, imageUrl, weather }) => {
   const token = localStorage.getItem("jwt");
-  return fetch(`${baseUrl}/items`, {
+  return fetch(`${BASE_URL}/items`, {
     method: "POST",
     headers: {
       ...headers,
@@ -40,7 +40,7 @@ export const addItem = ({ name, imageUrl, weather }) => {
 
 export const removeItem = (itemId) => {
   const token = localStorage.getItem("jwt");
-  return fetch(`${baseUrl}/items/${itemId}`, {
+  return fetch(`${BASE_URL}/items/${itemId}`, {
     method: "DELETE",
     headers: {
       ...headers,
@@ -50,7 +50,7 @@ export const removeItem = (itemId) => {
 };
 
 export const register = ({ email, password, name, avatar }) => {
-  return fetch(`${baseUrl}/signup`, {
+  return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export const register = ({ email, password, name, avatar }) => {
 };
 
 export const signIn = ({ email, password }) => {
-  return fetch(`${baseUrl}/signin`, {
+  return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export const signIn = ({ email, password }) => {
 
 export const likeItem = (itemId) => {
   const token = localStorage.getItem("jwt");
-  return fetch(`${baseUrl}/items/${itemId}/likes`, {
+  return fetch(`${BASE_URL}/items/${itemId}/likes`, {
     method: "PUT",
     headers: {
       ...headers,
@@ -82,7 +82,7 @@ export const likeItem = (itemId) => {
 
 export const unlikeItem = (itemId) => {
   const token = localStorage.getItem("jwt");
-  return fetch(`${baseUrl}/items/${itemId}/likes`, {
+  return fetch(`${BASE_URL}/items/${itemId}/likes`, {
     method: "DELETE",
     headers: {
       ...headers,
@@ -93,7 +93,7 @@ export const unlikeItem = (itemId) => {
 
 export const getUserInfo = () => {
   const token = localStorage.getItem("jwt");
-  return fetch(`${baseUrl}/users/me`, {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
       ...headers,
@@ -104,7 +104,7 @@ export const getUserInfo = () => {
 
 export const updateUserInfo = ({ name, avatar }) => {
   const token = localStorage.getItem("jwt");
-  return fetch(`${baseUrl}/users/me`, {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: {
       ...headers,

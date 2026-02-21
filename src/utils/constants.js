@@ -36,3 +36,8 @@ export const coordinates = {
 };
 
 export const apiKey = "30d249a0c413cda1c4bc3ff50668ead2";
+
+export const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwr.webs.vc"
+    : "http://localhost:3001";
