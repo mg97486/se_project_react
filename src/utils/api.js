@@ -91,7 +91,7 @@ export const unlikeItem = (itemId) => {
   }).then(handleServerResponse);
 };
 
-export const getUserInfo = () => {
+export const getUserInfo = (token) => {
   const token = localStorage.getItem("jwt");
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",

@@ -172,9 +172,11 @@ function App() {
     api
       .register(newUser)
       .then((res) => {
-        loginUser({ email: userData.email, password: userData.password });
-        setIsLoggedIn(true);
-        closeActiveModal();
+        if (res) {
+          console.log("Registration successful, logging in...");
+          loginUser({ email: userData.email, password: userData.password });
+          closeActiveModal();
+        }
       })
       .catch((err) => {
         console.error("Registration failed:", err);
@@ -190,16 +192,26 @@ function App() {
     api
       .signIn(existingUser)
       .then((res) => {
-        localStorage.setItem("jwt", res.token);
-        return api.getUserInfo();
+        if (res && res.token) {
+          localStorage.setItem("jwt", res.token);
+          return api.getUserInfo(res.token);
+        }
+        throw new error("No token recieved from server");
       })
       .then((userData) => {
-        setCurrentUser(userData);
-        setIsLoggedIn(true);
-        closeActiveModal();
+        const user = userResponse.data || userResponse;
+
+        if (user && user._id) {
+          setCurrentUser(userData);
+          setIsLoggedIn(true);
+          closeActiveModal();
+        } else {
+          throw new Error("User object is missing _id");
+        }
       })
       .catch((err) => {
         console.error("Login failed:", err);
+        setIsLoggedIn(false);
       });
   };
 
