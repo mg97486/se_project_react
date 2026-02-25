@@ -31,7 +31,15 @@ npm install
 npm run dev
 ```
 
-## Backened repository
+## Deployment link
+
+https://www.wtwr.webs.vc/
+
+## Frontend repository
+
+https://github.com/mg97486/se_project_react.git
+
+## Backend repository
 
 https://github.com/mg97486/se_project_express.git
 

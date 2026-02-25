@@ -12,10 +12,14 @@ const RegisterModal = ({ isOpen, onClose, onLogInClick, onSubmit }) => {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    onSubmit({
-      ...values,
-      avatar: values.avatarUrl,
-    });
+    const payload = {
+      email: values.email,
+      password: values.password,
+      name: values.name,
+    };
+    if (values.avatarUrl) payload.avatar = values.avatarUrl;
+
+    onSubmit(payload);
   }
 
   useEffect(() => {
