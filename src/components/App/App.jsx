@@ -196,12 +196,10 @@ function App() {
           localStorage.setItem("jwt", res.token);
           return api.getUserInfo(res.token);
         }
-        throw new error("No token recieved from server");
+        throw new Error("No token recieved from server");
       })
       .then((userData) => {
-        const user = userResponse.data || userResponse;
-
-        if (user && user._id) {
+        if (userData && userData._id) {
           setCurrentUser(userData);
           setIsLoggedIn(true);
           closeActiveModal();

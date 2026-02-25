@@ -11,7 +11,7 @@ export default function ClothesSection({
 }) {
   const currentUser = useContext(CurrentUserContext);
   const userItems = currentUser
-    ? clothingItems.filter((item) => item.owner === currentUser?._id)
+    ? clothingItems.filter((item) => item.owner === currentUser._id)
     : [];
   return (
     <div className="clothes-section">

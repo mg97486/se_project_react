@@ -16,7 +16,7 @@ function DeleteItemModal({ activeModal, onClose, card, onDelete, isLoggedIn }) {
           Are you sure you want to delete this item? This action is
           irreversible.
         </h2>
-        {isLoggedIn && currentUser?._id === card.owner && (
+        {isLoggedIn && currentUser && currentUser._id === card.owner && (
           <button
             type="button"
             className="delete__item_modal-delete-button"
